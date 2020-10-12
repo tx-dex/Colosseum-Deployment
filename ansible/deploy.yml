@@ -1,0 +1,34 @@
+# Ensure that python is available
+- name: "Deploy {{ environment_id }} App"
+  become: yes
+  hosts: "{{ environment_id }}"
+  vars_files:
+    - "infra/{{ environment_id }}.yml"
+    - "config/{{ environment_id }}.yml"
+    - "secrets/{{ environment_id }}.yml"
+  tasks:
+    - name: "Start Drupal container"
+      docker_container:
+        restart_policy: unless-stopped
+        state: started
+        pull: yes
+        name: "drupal"
+        image: "{{ project.images.drupal }}"
+        ports:
+          - 8080:80
+        env:
+          TZ: "Europe/Helsinki"
+          MYSQL_HOST: "{{ infra.private_ip }}"
+          MYSQL_PORT: "3306"
+          MYSQL_USERNAME: "{{ secrets.mysql.username }}"
+          MYSQL_PASSWORD: "{{ secrets.mysql.password }}"
+          MYSQL_DATABASE: "{{ secrets.mysql.database }}"
+          THEME_DEBUG: "0"
+          SITE_HASH_SALT: "{{ secrets.drupal.hash_salt }}"
+          BASE_URL: "{{ project.drupal.base_url }}"
+          REDIS_CACHE: "0"
+          REVERSE_PROXY_ENABLED: "1"
+        volumes:
+          - "site-files:/var/www/web/sites/default/files"
+  roles:
+    - job-login-thp-docker-registry
