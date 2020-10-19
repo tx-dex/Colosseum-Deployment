@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars_files:
+    - "secrets/{{ environment_id }}.yml"
+    - "config/{{ environment_id }}.yml"
+    - "infra/{{ environment_id }}.yml"
+  vars:
+    upcloud_hosts:
+      - title: "[{{ environment_id }}] Colosseum Academy"
+        hostname: "academy.colosseum.com"
+        upcloud_firewall_rules: "{{ firewall.common_rules }} + {{ firewall.webserver_rules }} + {{ firewall.default_rule }}"
+        upcloud_plan: "2xCPU-4GB"
+    upcloud_zone: "de-fra1"
+    upcloud_storage_devices:
+      - { size: 80, os: Ubuntu 18.04 }
+    upcloud_user: "devops"
+    upcloud_ssh_keys: "{{ ssh_keys.devops }}"
+  roles:
+    - infra-multiple-server-upcloud

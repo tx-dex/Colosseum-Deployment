@@ -13,7 +13,7 @@
         state: started
         pull: yes
         name: "drupal"
-        image: "{{ project.images.drupal }}"
+        image: "{{ project.images.drupal }}"
         ports:
           - 8080:80
         env:
@@ -28,6 +28,10 @@
           BASE_URL: "{{ project.drupal.base_url }}"
           REDIS_CACHE: "0"
           REVERSE_PROXY_ENABLED: "1"
+          STRIPE_SECRET_KEY: "{{ secrets.stripe.secret_key }}"
+          STRIPE_PUBLIC_KEY: "{{ secrets.stripe.public_key }}"
+          STRIPE_WEBHOOK_SECRET: "{{ secrets.stripe.webhook_secret }}"
+          REGISTRATION_ADMIN_EMAIL: "academy@colosseumdental.com"
         volumes:
           - "site-files:/var/www/web/sites/default/files"
   roles:

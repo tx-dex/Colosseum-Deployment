@@ -1,0 +1,40 @@
+- hosts: "{{ environment_id }}"
+  become: yes
+  gather_facts: False
+  vars_files:
+    - "infra/{{ environment_id }}.yml"
+    - "config/{{ environment_id }}.yml"
+    - "secrets/{{ environment_id }}.yml"
+  roles:
+    - bootstrap-distro
+  pre_tasks:
+    - name: 'install python2'
+      raw: sudo apt-get update && sudo apt-get -y install python-minimal
+
+
+- name: "Install {{ environment_id }} services"
+  become: yes
+  hosts: "{{ environment_id }}"
+  vars_files:
+    - "infra/{{ environment_id }}.yml"
+    - "config/{{ environment_id }}.yml"
+    - "secrets/{{ environment_id }}.yml"
+  vars:
+    #    endpoint_url: http://127.0.0.1:8080
+    nginx_domain_name: "academy.colosseumdental.com"
+    mysql_innodb_buffer_pool_size: "1G"
+    mysql_tmp_table_size: "64M"
+    mysql_max_heap_table_size: "64M"
+    mysql_bind_address: "{{ infra.private_ip}}"
+    mysql_root_password: "{{ secrets.mysql.root_password }}"
+    mysql_username: "{{ secrets.mysql.username }}"
+    mysql_password: "{{ secrets.mysql.password }}"
+    mysql_database: "d8_aca_prod"
+    mysql_databases: []
+    swap_file_size: "4G"
+  roles:
+    - service-common
+    - service-nginx-local
+    - service-mysql
+    - service-swap-file
+
