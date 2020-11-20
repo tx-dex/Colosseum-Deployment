@@ -1,6 +1,6 @@
 project:
   name: col 
   images:
-    drupal: thp.sangre.fi:4999/colosseum/academy:v1-2-3
+    drupal: thp.sangre.fi:4999/colosseum/academy:v1-2-5
   drupal:
     base_url: 'https://academy.colosseumdental.com'
