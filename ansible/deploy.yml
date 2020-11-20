@@ -34,5 +34,6 @@
           REGISTRATION_ADMIN_EMAIL: "academy@colosseumdental.com"
         volumes:
           - "site-files:/var/www/web/sites/default/files"
+          - "private-files:/var/www/private-files"
   roles:
     - job-login-thp-docker-registry
