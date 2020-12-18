@@ -1,2 +1,4 @@
 infra:
-  private_ip: 10.4.0.148 
+  private_ip:
+    academy: 10.4.0.148
+    website: 10.4.16.13
