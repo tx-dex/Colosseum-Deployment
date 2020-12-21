@@ -27,6 +27,7 @@
           SITE_HASH_SALT: "{{ secrets.website.drupal.hash_salt }}"
           BASE_URL: "{{ project.drupal.website.base_url }}"
           REDIS_CACHE: "0"
+          MODE: "PROD"
           REVERSE_PROXY_ENABLED: "1"
         volumes:
           - "site-files:/var/www/web/sites/default/files"
