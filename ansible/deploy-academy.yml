@@ -6,6 +6,9 @@
     - "infra/{{ environment_id }}.yml"
     - "config/{{ environment_id }}.yml"
     - "secrets/{{ environment_id }}.yml"
+  vars:
+    docker_registry_project_user: "{{ secrets.gitlab.user }}"
+    docker_registry_project_password: "{{ secrets.gitlab.password }}"
   tasks:
     - name: "Start Drupal container"
       docker_container:
@@ -25,12 +28,12 @@
           MYSQL_DATABASE: "{{ secrets.academy.mysql.database }}"
           THEME_DEBUG: "0"
           SITE_HASH_SALT: "{{ secrets.academy.drupal.hash_salt }}"
-          BASE_URL: "{{ project.drupal.base_url }}"
+          BASE_URL: "{{ project.drupal.academy.base_url }}"
           REDIS_CACHE: "0"
           REVERSE_PROXY_ENABLED: "1"
-          STRIPE_SECRET_KEY: "{{ secrets.stripe.secret_key }}"
-          STRIPE_PUBLIC_KEY: "{{ secrets.stripe.public_key }}"
-          STRIPE_WEBHOOK_SECRET: "{{ secrets.stripe.webhook_secret }}"
+          STRIPE_SECRET_KEY: "{{ secrets.academy.stripe.secret_key }}"
+          STRIPE_PUBLIC_KEY: "{{ secrets.academy.stripe.public_key }}"
+          STRIPE_WEBHOOK_SECRET: "{{ secrets.academy.stripe.webhook_secret }}"
           REGISTRATION_ADMIN_EMAIL: "academy@colosseumdental.com"
         volumes:
           - "site-files:/var/www/web/sites/default/files"

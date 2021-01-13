@@ -6,6 +6,9 @@
     - "infra/{{ environment_id }}.yml"
     - "config/{{ environment_id }}.yml"
     - "secrets/{{ environment_id }}.yml"
+  vars:
+    docker_registry_project_user: "{{ secrets.gitlab.user }}"
+    docker_registry_project_password: "{{ secrets.gitlab.password }}"
   tasks:
     - name: "Start Drupal container"
       docker_container:
