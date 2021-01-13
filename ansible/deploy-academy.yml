@@ -1,7 +1,7 @@
 # Ensure that python is available
 - name: "Deploy {{ environment_id }} App"
   become: yes
-  hosts: "{{ environment_id }}"
+  hosts: "{{ environment_id }}-academy"
   vars_files:
     - "infra/{{ environment_id }}.yml"
     - "config/{{ environment_id }}.yml"
@@ -13,18 +13,18 @@
         state: started
         pull: yes
         name: "drupal"
-        image: "{{ project.images.drupal }}"
+        image: "{{ project.images.academy }}"
         ports:
           - 8080:80
         env:
           TZ: "Europe/Helsinki"
-          MYSQL_HOST: "{{ infra.private_ip }}"
+          MYSQL_HOST: "{{ infra.private_ip.academy }}"
           MYSQL_PORT: "3306"
-          MYSQL_USERNAME: "{{ secrets.mysql.username }}"
-          MYSQL_PASSWORD: "{{ secrets.mysql.password }}"
-          MYSQL_DATABASE: "{{ secrets.mysql.database }}"
+          MYSQL_USERNAME: "{{ secrets.academy.mysql.username }}"
+          MYSQL_PASSWORD: "{{ secrets.academy.mysql.password }}"
+          MYSQL_DATABASE: "{{ secrets.academy.mysql.database }}"
           THEME_DEBUG: "0"
-          SITE_HASH_SALT: "{{ secrets.drupal.hash_salt }}"
+          SITE_HASH_SALT: "{{ secrets.academy.drupal.hash_salt }}"
           BASE_URL: "{{ project.drupal.base_url }}"
           REDIS_CACHE: "0"
           REVERSE_PROXY_ENABLED: "1"

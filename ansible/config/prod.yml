@@ -2,5 +2,10 @@ project:
   name: col 
   images:
     drupal: thp.sangre.fi:4999/colosseum/academy:v1-3-0
+    website: thp.sangre.fi:4999/colosseum/website:v0-9-0
   drupal:
-    base_url: 'https://academy.colosseumdental.com'
+    academy:
+      base_url: 'https://academy.colosseumdental.com'
+    website:
+      base_url: 'https://www.colosseumdental.com'
+
