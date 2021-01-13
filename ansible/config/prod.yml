@@ -1,8 +1,8 @@
 project:
   name: col 
   images:
-    academy: thp.sangre.fi:4999/colosseum/academy:v1-2-5
-    website: thp.sangre.fi:4999/colosseum/website:v1-0-0
+    academy: thp.sangre.fi:4999/colosseum/academy:v1-3-1
+    website: thp.sangre.fi:4999/colosseum/website:v1-0-1
   drupal:
     academy:
       base_url: 'https://academy.colosseumdental.com'
