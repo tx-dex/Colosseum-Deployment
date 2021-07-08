@@ -3,3 +3,6 @@ ansible_user=devops
 
 [website]
 www.colosseumdental.com
+
+[academy]
+academy.colosseumdental.com
