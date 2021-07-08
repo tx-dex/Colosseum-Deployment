@@ -1,7 +1,6 @@
 # Ensure that python is available
-- name: "Deploy {{ environment_id }} Website"
+- hosts: "website"
   become: yes
-  hosts: "{{ environment_id }}-website"
   vars_files:
     - "infra/{{ environment_id }}.yml"
     - "config/{{ environment_id }}.yml"
