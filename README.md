@@ -10,5 +10,5 @@ export ANSIBLE_ROLES_PATH="$HOME/projects/devops/wransible/roles"
 After that you can deploy new versions normally:
 ```bash
 cd ansible
-wransible-playbook deploy-academy prod
+wransible-playbook deploy-academy.yml prod
 ```
