@@ -1,7 +1,7 @@
 project:
   name: col 
   images:
-    academy: thp.sangre.fi:4999/colosseum/academy:v1-4-0
+    academy: thp.sangre.fi:4999/colosseum/academy:v1-4-1
     website: thp.sangre.fi:4999/colosseum/website:v1-1-2
   drupal:
     academy:
